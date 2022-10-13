@@ -23,9 +23,10 @@ public class MemberRequestDto {
   @NotBlank
   @NonNull
   @Size(min = 8,max = 20)
-  @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\\d~!@#$%^&*()+|=]$")
+  @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\\d~!@#$%^&*()+|=]{8,20}$")
   private String password;
 
   @NotBlank
+  @NonNull
   private String passwordConfirm;
 }
