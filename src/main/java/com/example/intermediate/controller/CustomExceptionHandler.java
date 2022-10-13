@@ -1,7 +1,9 @@
 package com.example.intermediate.controller;
 
-import com.example.intermediate.controller.error.SignupException;
-import com.example.intermediate.controller.response.ResponseDto;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -9,7 +11,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CustomExceptionHandler {
+    private String message;
+    private String field;
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidationExceptions(MethodArgumentNotValidException exception) {
@@ -18,12 +26,12 @@ public class CustomExceptionHandler {
                 .get(0)
                 .getDefaultMessage();
 
-        SignupException signupException = SignupException.builder()
+        CustomExceptionHandler customExceptionHandler = CustomExceptionHandler.builder()
                 .field(exception.getBindingResult().getFieldError().getField())
                 .message(errorMessage)
                 .build();
 
-        return new ResponseEntity<>(signupException, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(customExceptionHandler, HttpStatus.BAD_REQUEST);
     }
 
 }
