@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/api")
 public class PostController {
 
   private final PostService postService;
@@ -24,29 +25,29 @@ public class PostController {
                   paramType = "header"
           )
   })
-  @PostMapping(value = "/api/auth/post")
+  @PostMapping(value = "/auth/post")
   public ResponseDto<?> createPost(@RequestBody PostRequestDto requestDto,
       HttpServletRequest request) {
     return postService.createPost(requestDto, request);
   }
 
-  @GetMapping(value = "/api/post/{id}")
+  @GetMapping(value = "/post/{id}")
   public ResponseDto<?> getPost(@PathVariable Long id) {
     return postService.getPost(id);
   }
 
-  @GetMapping(value = "/api/post")
+  @GetMapping(value = "/post")
   public ResponseDto<?> getAllPosts() {
     return postService.getAllPost();
   }
 
-  @PutMapping(value = "/api/auth/post/{id}")
+  @PutMapping(value = "/auth/post/{id}")
   public ResponseDto<?> updatePost(@PathVariable Long id, @RequestBody PostRequestDto postRequestDto,
       HttpServletRequest request) {
     return postService.updatePost(id, postRequestDto, request);
   }
 
-  @DeleteMapping(value = "/api/auth/post/{id}")
+  @DeleteMapping(value = "/auth/post/{id}")
   public ResponseDto<?> deletePost(@PathVariable Long id,
       HttpServletRequest request) {
     return postService.deletePost(id, request);

@@ -11,28 +11,29 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/api")
 public class CommentController {
 
   private final CommentService commentService;
 
-  @PostMapping(value = "/api/auth/comment")
+  @PostMapping(value = "/auth/comment")
   public ResponseDto<?> createComment(@RequestBody CommentRequestDto requestDto,
       HttpServletRequest request) {
     return commentService.createComment(requestDto, request);
   }
 
-  @GetMapping(value = "/api/comment/{id}")
+  @GetMapping(value = "/comment/{id}")
   public ResponseDto<?> getAllComments(@PathVariable Long id) {
     return commentService.getAllCommentsByPost(id);
   }
 
-  @PutMapping(value = "/api/auth/comment/{id}")
+  @PutMapping(value = "/auth/comment/{id}")
   public ResponseDto<?> updateComment(@PathVariable Long id, @RequestBody CommentRequestDto requestDto,
       HttpServletRequest request) {
     return commentService.updateComment(id, requestDto, request);
   }
 
-  @DeleteMapping(value = "/api/auth/comment/{id}")
+  @DeleteMapping(value = "/auth/comment/{id}")
   public ResponseDto<?> deleteComment(@PathVariable Long id,
       HttpServletRequest request) {
     return commentService.deleteComment(id, request);

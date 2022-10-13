@@ -12,23 +12,24 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/api")
 public class MemberController {
 
   private final MemberService memberService;
 
-  @PostMapping(value = "/api/member/signup")
+  @PostMapping(value = "/member/signup")
   public ResponseDto<?> signup(@RequestBody MemberRequestDto requestDto) {
     return memberService.createMember(requestDto);
   }
 
-  @PostMapping(value = "/api/member/login")
+  @PostMapping(value = "/member/login")
   public ResponseDto<?> login(@RequestBody LoginRequestDto requestDto,
       HttpServletResponse response
   ) {
     return memberService.login(requestDto, response);
   }
 
-  @PostMapping(value = "/api/auth/member/logout")
+  @PostMapping(value = "/auth/member/logout")
   public ResponseDto<?> logout(HttpServletRequest request) {
     return memberService.logout(request);
   }
